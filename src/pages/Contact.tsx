@@ -1,297 +1,451 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import {
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  Clock,
+  Copy,
+  Lock,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Scale,
+  Send,
+  ShieldCheck,
+  User,
+} from 'lucide-react';
 
 interface ContactProps {
   triggerToast: (msg: string, type: 'success' | 'info') => void;
 }
+
+type Status = 'default' | 'loading' | 'success' | 'error';
+
+const practiceAreas = [
+  'Derecho corporativo y comercial',
+  'Consultoria tributaria',
+  'Auditoria y aseguramiento contable',
+  'Proteccion de activos y seguros',
+  'Litigios y controversias',
+  'Aun no estoy seguro',
+];
+
+const directChannels = [
+  {
+    label: 'Ubicacion',
+    value: 'Avenida 82 # 11-35, Piso 12. Bogota, D.C.',
+    copy: 'Avenida 82 # 11-35, Piso 12. Bogota, D.C.',
+    icon: MapPin,
+  },
+  {
+    label: 'Correo',
+    value: 'contacto@amv.com.co',
+    copy: 'contacto@amv.com.co',
+    icon: Mail,
+  },
+  {
+    label: 'Telefono',
+    value: '+57 (601) 345-6789',
+    copy: '+57 (601) 345-6789',
+    icon: Phone,
+  },
+  {
+    label: 'Horario',
+    value: 'Lunes a viernes, 8:00 A.M. a 6:00 P.M.',
+    copy: 'Lunes a viernes, 8:00 A.M. a 6:00 P.M.',
+    icon: Clock,
+  },
+];
 
 export const Contact: React.FC<ContactProps> = ({ triggerToast }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    company: '',
-    businessUnit: 'tax',
-    date: '',
-    time: '',
-    description: ''
+    practiceArea: practiceAreas[0],
+    description: '',
   });
 
-  const [status, setStatus] = useState<'default' | 'loading' | 'success' | 'error'>('default');
+  const [status, setStatus] = useState<Status>('default');
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.date) {
+  const completion = useMemo(() => {
+    const required = [
+      formData.name,
+      formData.email,
+      formData.phone,
+      formData.practiceArea,
+      formData.description,
+    ];
+
+    return Math.round((required.filter(Boolean).length / required.length) * 100);
+  }, [formData]);
+
+  const handleCopy = async (text: string, label: string) => {
+    await navigator.clipboard.writeText(text);
+    setCopiedField(label);
+    triggerToast(`${label} copiado al portapapeles.`, 'info');
+    setTimeout(() => setCopiedField(null), 2200);
+  };
+
+  const updateField = (field: keyof typeof formData, value: string) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.description.trim()
+    ) {
       setStatus('error');
-      triggerToast('Por favor complete los campos obligatorios.', 'info');
-      setTimeout(() => setStatus('default'), 3000);
+      triggerToast('Complete nombre, correo, telefono y resumen del caso.', 'info');
+      setTimeout(() => setStatus('default'), 2800);
       return;
     }
 
     setStatus('loading');
     setTimeout(() => {
       setStatus('success');
-      triggerToast('Sesión programada con éxito. Recibirá confirmación en su correo.', 'success');
-      setFormData({
-        name: '', email: '', phone: '', company: '',
-        businessUnit: 'tax', date: '', time: '', description: ''
-      });
-      setTimeout(() => setStatus('default'), 4000);
-    }, 2000);
+      triggerToast('Solicitud recibida. El equipo AMV revisara su caso.', 'success');
+    }, 1300);
   };
 
-  const officeInfo = [
-    {
-      icon: <MapPin className="h-5 w-5 text-corporate-red flex-shrink-0" />,
-      label: 'Ubicación',
-      value: 'Edificio Alianza, Piso 12. Avenida 82 # 11-35. Bogotá, D.C.'
-    },
-    {
-      icon: <Phone className="h-5 w-5 text-corporate-red flex-shrink-0" />,
-      label: 'Central Telefónica',
-      value: '+57 (601) 345-6789'
-    },
-    {
-      icon: <Mail className="h-5 w-5 text-corporate-red flex-shrink-0" />,
-      label: 'Secretaría Técnica',
-      value: 'contacto@amv.com.co'
-    },
-    {
-      icon: <Clock className="h-5 w-5 text-corporate-red flex-shrink-0" />,
-      label: 'Horario de Atención',
-      value: 'Lunes a Viernes · 8:00 A.M. – 6:00 P.M.'
-    },
-  ];
+  const resetForm = () => {
+    setStatus('default');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      practiceArea: practiceAreas[0],
+      description: '',
+    });
+  };
 
   return (
-    <div className="pb-32 page-fade-in max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#EDE8DF] text-[#233142] selection:bg-[#B22222] selection:text-[#EDE8DF]">
+      <section className="relative overflow-hidden bg-[#1A242F] text-[#EDE8DF]">
+        <img
+          src="ImagenHero.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover object-[58%_center] opacity-70 blur-[5px] saturate-[0.75]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[#1A242F]/30" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_46%,rgba(237,232,223,.16),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(178,34,34,.18),transparent_28%),linear-gradient(90deg,rgba(26,36,47,.88)_0%,rgba(26,36,47,.68)_42%,rgba(26,36,47,.46)_100%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.018]"
+          style={{
+            backgroundImage:
+              'linear-gradient(110deg, transparent 0 47%, rgba(237,232,223,.35) 48%, transparent 49%), linear-gradient(#EDE8DF 1px, transparent 1px)',
+            backgroundSize: '72px 72px, 100% 96px',
+          }}
+        />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(237,232,223,.07))]" />
 
-      {/* ═══════════════════════════════════
-          PAGE HEADER
-      ═══════════════════════════════════ */}
-      <section className="pt-20 pb-16 max-w-3xl space-y-7 stagger-up">
-        <div className="eyebrow">Agendar Reunión</div>
-        <h1 className="font-editorial text-5xl md:text-7xl font-semibold text-deep-slate-blue leading-[1.02]">
-          Coordinar Consulta Técnica
-        </h1>
-        <p className="text-lg text-soft-slate leading-relaxed font-sans font-light">
-          Solicite una sesión formal de diagnóstico con nuestros socios principales. Por favor indique el área de interés para asignar al especialista idóneo.
-        </p>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 md:py-18 lg:min-h-[calc(100dvh-88px)] lg:grid-cols-12 lg:items-center lg:gap-x-10 lg:px-8 lg:py-18 xl:gap-x-12">
+          <div className="relative z-10 space-y-6 lg:col-span-4">
+            <div className="space-y-5 stagger-up">
+              <div className="inline-flex items-center gap-3 rounded-full border border-[#B22222]/35 bg-[#B22222]/10 px-4 py-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#B22222]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#EDE8DF]">
+                  Consulta confidencial
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                <h1 className="max-w-[8ch] font-serif-display text-4xl font-bold uppercase leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-[3.35rem] xl:text-[3.75rem]">
+                  Iniciemos una conversacion.
+                </h1>
+                <div className="h-px w-44 bg-[#EDE8DF]/12">
+                  <div className="h-px w-20 bg-[#B22222]" />
+                </div>
+              </div>
+
+              <p className="max-w-xs text-sm font-light leading-relaxed text-[#EDE8DF]/72">
+                Cuentenos que esta ocurriendo y que tan urgente es. Con esos datos asignamos el socio y el equipo tecnico adecuado.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/12 bg-white/[0.045] p-5 backdrop-blur-sm sm:p-6">
+              <h2 className="mb-5 font-serif text-2xl font-bold text-[#EDE8DF]">
+                Contacto directo
+              </h2>
+              <div className="divide-y divide-white/10">
+                {directChannels.map((item) => {
+                  const Icon = item.icon;
+                  const isCopied = copiedField === item.label;
+
+                  return (
+                    <div key={item.label} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#B22222]/18 text-[#EDE8DF] ring-1 ring-[#B22222]/30">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-xs font-bold text-white">{item.label}</p>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy(item.copy, item.label)}
+                            className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#EDE8DF]/58 transition hover:text-[#B22222]"
+                          >
+                            {isCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                            {isCopied ? 'Copiado' : 'Copiar'}
+                          </button>
+                        </div>
+                        <p className="mt-1 text-xs leading-relaxed text-[#EDE8DF]/64">{item.value}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs text-[#EDE8DF]/70">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                <ShieldCheck className="mb-3 h-5 w-5 text-[#B22222]" />
+                <p className="font-bold text-white">Reserva legal</p>
+                <p className="mt-1 leading-relaxed">Informacion tratada bajo secreto profesional.</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+                <Clock className="mb-3 h-5 w-5 text-[#B22222]" />
+                <p className="font-bold text-white">Respuesta agil</p>
+                <p className="mt-1 leading-relaxed">Primer contacto en menos de 24 horas habiles.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 lg:col-span-7 lg:col-start-6">
+            <div className="relative rounded-[2rem] bg-[#FAF7F2] p-4 text-[#233142] shadow-[0_28px_80px_rgba(0,0,0,.22)] sm:p-6 lg:rounded-[2.5rem] lg:[clip-path:polygon(3%_0,100%_0,100%_88%,96%_100%,0_100%,0_7%)]">
+              <div className="pointer-events-none absolute left-6 top-6 hidden h-16 w-24 border-l border-t border-[#233142]/10 lg:block" />
+              <div className="pointer-events-none absolute bottom-7 left-7 hidden grid-cols-4 gap-2 opacity-30 lg:grid">
+                {Array.from({ length: 16 }).map((_, index) => (
+                  <span key={index} className="h-1 w-1 rounded-full bg-[#B22222]" />
+                ))}
+              </div>
+
+              {status === 'success' ? (
+                <div className="flex min-h-[560px] flex-col items-center justify-center px-4 py-16 text-center sm:px-10">
+                  <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-full bg-[#B22222]/10 text-[#B22222] ring-1 ring-[#B22222]/20">
+                    <CheckCircle2 className="h-10 w-10" />
+                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#B22222]">
+                    Solicitud recibida
+                  </p>
+                  <h2 className="mt-3 max-w-xl font-serif-display text-4xl font-bold uppercase leading-tight text-[#233142] sm:text-5xl">
+                    Su caso ya esta en revision preliminar.
+                  </h2>
+                  <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-[#57606F]">
+                    Enviaremos la confirmacion a {formData.email}. Su solicitud sera asignada segun el area de {formData.practiceArea.toLowerCase()}.
+                  </p>
+                  <button type="button" onClick={resetForm} className="btn-pill-accent mt-9">
+                    <span>Enviar otra consulta</span>
+                    <div className="btn-pill-icon">
+                      <ArrowRight className="h-3.5 w-3.5 text-[#EDE8DF]" />
+                    </div>
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="grid gap-5 lg:grid-cols-[1fr_5.5rem]">
+                  <div className="space-y-5 px-1 py-3 sm:px-4 sm:py-5 lg:pl-12 lg:pr-4 xl:pl-14">
+                    <div className="border-b border-[#233142]/10 pb-5">
+                      <p className="font-signature text-xl text-[#B22222]/82 sm:text-2xl">
+                        Estamos aqui para ayudarle
+                      </p>
+                      <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                          <h2 className="font-serif-display text-2xl font-bold uppercase leading-tight text-[#233142] sm:text-3xl">
+                            Solicitud de contacto
+                          </h2>
+                          <p className="mt-1.5 max-w-xl text-xs font-light leading-relaxed text-[#57606F]">
+                            Complete solo los datos indispensables para revisar su caso.
+                          </p>
+                        </div>
+                        <div className="w-full max-w-[180px] shrink-0 rounded-full border border-[#233142]/10 bg-[#EDE8DF]/70 px-3 py-2">
+                          <div className="mb-1 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-[#57606F]">
+                            <span>Avance</span>
+                            <span className="text-[#B22222]">{completion}%</span>
+                          </div>
+                          <div className="h-1 overflow-hidden rounded-full bg-[#233142]/10">
+                            <div className="h-full bg-[#B22222] transition-all duration-500" style={{ width: `${completion}%` }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
+                      <Field label="Nombre completo" required icon={<User className="h-4 w-4" />}>
+                        <input
+                          required
+                          value={formData.name}
+                          onChange={(event) => updateField('name', event.target.value)}
+                          placeholder="Nombre y apellido"
+                          className="contact-line-input"
+                        />
+                      </Field>
+
+                      <Field label="Correo electronico" required icon={<Mail className="h-4 w-4" />}>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(event) => updateField('email', event.target.value)}
+                          placeholder="correo@empresa.com"
+                          className="contact-line-input"
+                        />
+                      </Field>
+
+                      <Field label="Telefono directo" required icon={<Phone className="h-4 w-4" />}>
+                        <input
+                          type="tel"
+                          required
+                          value={formData.phone}
+                          onChange={(event) => updateField('phone', event.target.value)}
+                          placeholder="+57 300 123 4567"
+                          className="contact-line-input"
+                        />
+                      </Field>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-5">
+                      <SegmentedGroup
+                        label="Area de practica"
+                        icon={<Scale className="h-4 w-4" />}
+                        options={practiceAreas}
+                        value={formData.practiceArea}
+                        onChange={(value) => updateField('practiceArea', value)}
+                      />
+                    </div>
+
+                    <Field label="Resumen del caso" required icon={<MessageSquare className="h-4 w-4" />}>
+                      <textarea
+                        required
+                        rows={4}
+                        value={formData.description}
+                        onChange={(event) => updateField('description', event.target.value)}
+                        placeholder="Describa brevemente el asunto, fechas relevantes y el resultado que espera obtener."
+                        className="contact-line-input resize-none leading-relaxed"
+                      />
+                    </Field>
+
+                    {status === 'error' && (
+                      <div className="rounded-2xl border border-[#B22222]/25 bg-[#B22222]/8 px-4 py-3 text-xs font-semibold text-[#B22222]">
+                        Faltan datos indispensables para preparar la comunicacion inicial.
+                      </div>
+                    )}
+
+                    <div className="flex items-start gap-2 border-t border-[#233142]/10 pt-5 text-[11px] leading-relaxed text-[#57606F]">
+                      <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#B22222]" />
+                      <span>Sus datos se tratan bajo secreto profesional y politica de proteccion de datos.</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="group flex min-h-16 items-center justify-between rounded-[1.55rem] bg-[#B22222] px-5 py-4 text-[#EDE8DF] transition hover:bg-[#991B1B] active:scale-[0.99] lg:min-h-full lg:flex-col lg:p-3"
+                    aria-label="Enviar consulta"
+                  >
+                    {status === 'loading' ? (
+                      <span className="text-xs font-bold uppercase tracking-[0.18em] lg:mt-8 lg:[writing-mode:vertical-rl] lg:rotate-180 lg:tracking-[0.38em]">
+                        Enviando
+                      </span>
+                    ) : (
+                      <span className="text-xs font-bold uppercase tracking-[0.18em] lg:mt-8 lg:[writing-mode:vertical-rl] lg:rotate-180 lg:tracking-[0.38em]">
+                        Enviar mensaje
+                      </span>
+                    )}
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#233142] transition group-hover:-translate-y-1 group-hover:translate-x-1 lg:mb-3 lg:h-14 lg:w-14">
+                      {status === 'loading' ? (
+                        <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#EDE8DF] border-t-transparent" />
+                      ) : (
+                        <Send className="h-5 w-5" />
+                      )}
+                    </span>
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ═══════════════════════════════════
-          MAIN GRID
-      ═══════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-
-        {/* Left: Office details */}
-        <div className="lg:col-span-4 space-y-5 stagger-up" style={{ animationDelay: '100ms' }}>
-          <div className="bg-white border border-deep-slate-blue/6 rounded-3xl p-8 space-y-7 shadow-[0_4px_24px_rgba(35,49,66,0.05)]">
-            <h3 className="font-editorial text-2xl font-bold text-deep-slate-blue pb-5 border-b border-deep-slate-blue/6">
-              Coordenadas de Oficina
-            </h3>
-
-            <div className="space-y-7 font-sans">
-              {officeInfo.map((item, idx) => (
-                <div key={idx} className="flex gap-4 items-start group">
-                  <div className="h-10 w-10 rounded-xl bg-corporate-red/6 border border-corporate-red/12 flex items-center justify-center shrink-0 group-hover:bg-corporate-red/12 transition-colors">
-                    {item.icon}
-                  </div>
-                  <div className="pt-0.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-soft-slate/60 block mb-1">{item.label}</span>
-                    <p className="text-[13px] font-semibold text-deep-slate-blue leading-relaxed">
-                      {item.value}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <section className="border-t border-[#233142]/8 bg-[#EDE8DF] px-4 py-7 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-3 text-center text-xs text-[#57606F] sm:flex-row">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#233142] text-[#EDE8DF]">
+            <ShieldCheck className="h-5 w-5" />
           </div>
-
-          {/* Reassurance block */}
-          <div className="bg-deep-slate-blue text-bone-white rounded-3xl p-7 space-y-4">
-            <h4 className="font-editorial text-xl font-semibold">Atención Directa de Socios</h4>
-            <p className="text-[13px] text-bone-white/60 leading-relaxed font-light">
-              Cada consulta es atendida por un socio principal. Sin intermediarios, sin asistentes. Calidad garantizada desde el primer contacto.
-            </p>
-            <div className="h-px bg-bone-white/8" />
-            <div className="flex items-center gap-2 text-[11px] text-bone-white/50">
-              <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              Disponible · Respuesta en menos de 2 horas hábiles
-            </div>
-          </div>
+          <p>
+            Tiempo estimado de respuesta: <strong className="text-[#233142]">24 horas habiles</strong>. Para asuntos urgentes, indique el vencimiento o audiencia mas cercana en el resumen.
+          </p>
         </div>
-
-        {/* Right: Form */}
-        <div className="lg:col-span-8 stagger-up" style={{ animationDelay: '200ms' }}>
-          {status === 'success' ? (
-            <div className="bg-deep-slate-blue text-bone-white rounded-3xl p-14 text-center space-y-8 shadow-xl animate-scale-up">
-              <div className="h-20 w-20 bg-corporate-red/20 border border-corporate-red/30 text-corporate-red rounded-full flex items-center justify-center mx-auto">
-                <CheckCircle2 className="h-10 w-10" />
-              </div>
-              <h2 className="font-editorial text-3xl md:text-4xl font-semibold">
-                Consulta Programada Exitosamente
-              </h2>
-              <p className="text-[14px] text-bone-white/70 max-w-md mx-auto leading-relaxed font-sans font-light">
-                Hemos registrado su solicitud. Un especialista de la secretaría técnica se comunicará con usted en las próximas 2 horas hábiles para coordinar los detalles de conexión remota o acceso a las oficinas.
-              </p>
-              <button
-                onClick={() => setStatus('default')}
-                className="btn-accent"
-              >
-                <span>Volver a Agendar</span>
-              </button>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white border border-deep-slate-blue/6 rounded-3xl p-10 md:p-14 space-y-8 shadow-[0_4px_24px_rgba(35,49,66,0.05)]"
-            >
-              <h3 className="font-editorial text-3xl font-bold text-deep-slate-blue pb-2 border-b border-deep-slate-blue/6">
-                Formulario de Consulta
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Name */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                    Nombre Completo <span className="text-corporate-red">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Ej. Carolina Villegas"
-                    className="input-premium"
-                  />
-                </div>
-
-                {/* Email */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                    Correo Corporativo <span className="text-corporate-red">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="correo@empresa.com"
-                    className="input-premium"
-                  />
-                </div>
-
-                {/* Phone */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                    Teléfono de Contacto <span className="text-corporate-red">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="Ej. +57 300 123 4567"
-                    className="input-premium"
-                  />
-                </div>
-
-                {/* Company */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                    Empresa o Razón Social
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    placeholder="Ej. Grupo Comercial S.A."
-                    className="input-premium"
-                  />
-                </div>
-
-                {/* Business Unit */}
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                    Unidad de Interés <span className="text-corporate-red">*</span>
-                  </label>
-                  <select
-                    value={formData.businessUnit}
-                    onChange={(e) => setFormData({ ...formData, businessUnit: e.target.value })}
-                    className="input-premium"
-                  >
-                    <option value="legal">Derecho Corporativo</option>
-                    <option value="tax">Planeación y Litigio Tributario</option>
-                    <option value="accounting">Auditoría / Revisoría Contable</option>
-                    <option value="insurance">Protección de Activos y Seguros</option>
-                  </select>
-                </div>
-
-                {/* Date / Time */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                      Fecha <span className="text-corporate-red">*</span>
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="input-premium"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                      Hora Preferida
-                    </label>
-                    <input
-                      type="time"
-                      value={formData.time}
-                      onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                      className="input-premium"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-deep-slate-blue/70 block">
-                  Descripción breve de la contingencia societaria o fiscal
-                </label>
-                <textarea
-                  rows={4}
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Por favor resuma el objeto de la consulta..."
-                  className="input-premium resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="btn-primary w-full justify-center py-4"
-                style={{ borderRadius: '16px' }}
-              >
-                {status === 'loading' ? (
-                  <>
-                    <span className="h-4 w-4 border-2 border-bone-white border-t-transparent rounded-full animate-spin" />
-                    <span>Procesando solicitud...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Programar Diagnóstico Técnico</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
+
+const Field = ({
+  label,
+  required,
+  icon,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) => (
+  <label className="block">
+    <span className="mb-2 flex items-center gap-2 text-xs font-bold text-[#233142]">
+      <span className="text-[#B22222]">{icon}</span>
+      <span>
+        {label} {required && <span className="text-[#B22222]">*</span>}
+      </span>
+    </span>
+    {children}
+  </label>
+);
+
+const SegmentedGroup = ({
+  label,
+  icon,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+}) => (
+  <div>
+    <div className="mb-3 flex items-center gap-2 text-xs font-bold text-[#233142]">
+      <span className="text-[#B22222]">{icon}</span>
+      <span>{label}</span>
+    </div>
+    <div className="flex flex-wrap gap-2">
+      {options.map((option) => {
+        const isSelected = option === value;
+
+        return (
+          <button
+            key={option}
+            type="button"
+            onClick={() => onChange(option)}
+            className={`rounded-full border px-3 py-2 text-[11px] font-bold transition active:scale-[0.98] ${isSelected
+              ? 'border-[#233142] bg-[#233142] text-[#EDE8DF]'
+              : 'border-[#233142]/12 bg-white/55 text-[#57606F] hover:border-[#B22222]/40 hover:text-[#233142]'
+              }`}
+          >
+            {option}
+          </button>
+        );
+      })}
+    </div>
+  </div>
+);

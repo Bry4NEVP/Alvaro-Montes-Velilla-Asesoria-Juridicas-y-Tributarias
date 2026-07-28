@@ -20,7 +20,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           onClick={() => setCurrentRoute('practice')}
           className="text-xs font-bold uppercase tracking-wider bg-corporate-red text-bone-white px-6 py-3 rounded-lg hover:bg-deep-slate-blue transition-all"
         >
-          Volver a Prácticas
+          Volver a Áreas
         </button>
       </div>
     );
@@ -38,7 +38,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-soft-slate hover:text-corporate-red transition-colors focus:outline-none cursor-pointer"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver a Prácticas
+          Volver a Áreas
         </button>
       </section>
 
@@ -64,7 +64,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           {/* Details list */}
           <div className="space-y-6">
             <h2 className="font-editorial text-2xl font-semibold text-deep-slate-blue">
-              Líneas de Intervención Específicas
+              Líneas de asesoría
             </h2>
             <ul className="divide-y divide-deep-slate-blue/5">
               {service.details.map((detail, idx) => (
@@ -79,7 +79,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           {/* Benefits Grid */}
           <div className="bg-white border border-deep-slate-blue/5 rounded-2xl p-8 space-y-6">
             <h2 className="font-editorial text-2xl font-semibold text-deep-slate-blue">
-              Beneficios Clave para la Organización
+              Beneficios para el cliente
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {service.benefits.map((benefit, idx) => (
@@ -94,7 +94,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           {/* Deliverables */}
           <div className="space-y-6">
             <h2 className="font-editorial text-2xl font-semibold text-deep-slate-blue">
-              Entregables y Productos de la Asesoría
+              Orientación y acompañamiento
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {service.deliverables.map((item, idx) => (
@@ -112,16 +112,16 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           {/* Consultation CTA Widget */}
           <div className="bg-deep-slate-blue text-bone-white rounded-3xl p-8 space-y-6 shadow-xl">
             <h3 className="font-editorial text-2xl font-semibold leading-tight text-bone-white">
-              ¿Requiere evaluar su caso con un especialista?
+              ¿Requiere evaluar su caso?
             </h3>
             <p className="text-xs text-bone-white/70 leading-relaxed font-sans font-light">
-              Nuestros socios agendan reuniones técnicas mensuales para realizar diagnósticos preliminares de viabilidad.
+              Nuestro equipo ofrece orientación clara para revisar su requerimiento y definir los pasos a seguir.
             </p>
             <button 
               onClick={() => setCurrentRoute('contact')}
               className="w-full text-center bg-corporate-red text-bone-white hover:bg-white hover:text-deep-slate-blue py-3.5 rounded-xl font-bold uppercase tracking-wider text-xs transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
             >
-              Agendar Sesión de Diagnóstico
+              Solicitar asesoría
               <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
@@ -129,7 +129,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId, service
           {/* Partner profile contacts list */}
           <div className="bg-white border border-deep-slate-blue/5 rounded-3xl p-8 space-y-6">
             <h3 className="font-editorial text-lg font-bold text-deep-slate-blue">
-              Especialistas Responsables
+              Equipo relacionado
             </h3>
             <div className="space-y-6">
               {relatedPartners.slice(0, 2).map((partner) => (

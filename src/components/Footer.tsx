@@ -52,15 +52,15 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentRoute }) => {
             </button>
 
             <p className="text-[13px] text-bone-white/55 leading-relaxed font-sans font-light max-w-xs">
-              Plataforma digital integrada de asesoría jurídica de alto nivel, consultoría impositiva, revisoría contable y coberturas de seguros corporativos.
+              Firma especializada en brindar soluciones jurídicas, contables y tributarias con enfoque profesional, ético y estratégico.
             </p>
 
             {/* Contact details */}
             <div className="space-y-3">
               {[
-                { icon: <MapPin className="h-3.5 w-3.5" />, text: 'Edificio Alianza, Piso 12. Avenida 82 #11-35, Bogotá' },
-                { icon: <Phone className="h-3.5 w-3.5" />, text: '+57 (601) 345-6789' },
-                { icon: <Mail className="h-3.5 w-3.5" />, text: 'contacto@amv.com.co' },
+                { icon: <MapPin className="h-3.5 w-3.5" />, text: 'Calle 23 #19-34, antiguo Edificio Banco de Bogotá, piso 7, oficina 706 D' },
+                { icon: <Phone className="h-3.5 w-3.5" />, text: '301 637 7475 · 323 499 4579 · 304 212 6224' },
+                { icon: <Mail className="h-3.5 w-3.5" />, text: 'velmonasesorias.jct@gmail.com' },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2.5">
                   <span className="text-corporate-red mt-0.5 shrink-0">{item.icon}</span>
@@ -71,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentRoute }) => {
 
             <div className="flex items-center gap-2 text-[11px] text-bone-white/35">
               <Shield className="h-3.5 w-3.5 text-corporate-red/60" />
-              <span>WCAG AA Accessibility Compliant</span>
+              <span>Atención de lunes a viernes y sábado en horario de oficina</span>
             </div>
           </div>
 
@@ -83,10 +83,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentRoute }) => {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: 'Derecho Jurídico y Comercial', route: 'practice:legal' },
-                { label: 'Planeación y Consultoría Tributaria', route: 'practice:tax' },
-                { label: 'Auditoría y Aseguramiento Contable', route: 'practice:accounting' },
-                { label: 'Protección de Activos y Seguros', route: 'practice:insurance' },
+                { label: 'Área Jurídica', route: 'practice:legal' },
+                { label: 'Área Tributaria', route: 'practice:tax' },
+                { label: 'Área Contable', route: 'practice:accounting' },
+                { label: 'Área de Seguros', route: 'practice:insurance' },
               ].map(({ label, route }) => (
                 <li key={route}>
                   <button
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentRoute }) => {
               Boletín Editorial
             </h4>
             <p className="text-[13px] text-bone-white/50 leading-relaxed font-sans font-light">
-              Reciba bimestralmente nuestro boletín de actualización tributaria y legal elaborado por nuestros socios principales.
+              Reciba información de orientación jurídica, contable y tributaria preparada por la firma.
             </p>
             <form onSubmit={handleSubscribe} className="space-y-3">
               <div className="relative">
@@ -177,7 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentRoute }) => {
         {/* Bottom bar */}
         <div className="h-px bg-bone-white/6" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-7 text-[11px] text-bone-white/30">
-          <p>© 2026 Alvarado Montes Velilla · Todos los derechos reservados · Nit: 900.124.567-8</p>
+          <p>© 2026 Alvarado Montes Velilla · Todos los derechos reservados</p>
           <div className="flex gap-6">
             <button onClick={() => setCurrentRoute('privacy')} className="hover:text-corporate-red transition-colors focus:outline-none cursor-pointer">
               Política de Privacidad

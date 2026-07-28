@@ -7,50 +7,65 @@
   --color-corporate-red: #B22222;
   --color-soft-slate: #57606F;
   --color-ink-dark: #1A242F;
-  
-  --font-serif: "EB Garamond", serif;
-  --font-sans: "Inter", sans-serif;
-  
-  /* Ultra-refined spatial shadow system */
-  --shadow-card: 0 2px 10px rgba(35, 49, 66, 0.04), 0 10px 30px rgba(35, 49, 66, 0.05);
-  --shadow-card-hover: 0 12px 36px rgba(35, 49, 66, 0.08), 0 30px 60px rgba(35, 49, 66, 0.1);
-  --shadow-float: 0 24px 70px rgba(35, 49, 66, 0.12);
-  --shadow-glass: 0 8px 32px rgba(35, 49, 66, 0.08);
-  
-  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-fade-in: fade-in 0.6s ease-out forwards;
-  --animate-scale-up: scale-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-reveal-up: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-float: float 6s ease-in-out infinite;
-  
+
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Handcrafted, flat natural shadow system (No AI-style blurred floating drop shadows) */
+  --shadow-card: 0 2px 8px rgba(35, 49, 66, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(35, 49, 66, 0.06);
+  --shadow-float: 0 8px 24px rgba(35, 49, 66, 0.06);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
+  --animate-scale-up: scale-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
   @keyframes fade-up {
-    0% { opacity: 0; transform: translateY(28px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   @keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
+
   @keyframes scale-up {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
+    0% {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
-  @keyframes reveal-up {
-    0% { opacity: 0; transform: translateY(40px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-  }
-  @keyframes shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
+
+  @keyframes progress {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
   }
 }
 
 /* ─────────────────────────────────────────
-   BASE STYLES
+   BASE STYLES — FLAT PREMIUM SURFACES
 ───────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
@@ -59,236 +74,233 @@ html {
 body {
   background-color: #EDE8DF;
   color: #233142;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .font-editorial {
-  font-family: "EB Garamond", serif;
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-editorial,
+.font-serif,
 .font-serif-display {
-  font-family: "Playfair Display", "EB Garamond", serif;
+  font-family: "Newsreader", Georgia, serif;
+  letter-spacing: -0.015em;
 }
 
-.font-script {
-  font-family: "Alex Brush", cursive;
+.font-sans {
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+.font-script,
 .font-signature {
-  font-family: "Alex Brush", cursive;
-  font-size: 2.2rem;
-  line-height: 1;
+  font-family: "Newsreader", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: normal;
 }
 
 /* ─────────────────────────────────────────
-   HIGH-END DOUBLE-BEZEL (DOPPELRAND) ARCHITECTURE
+   FLAT PREMIUM MATERIAL CONTAINERS & CARDS
 ───────────────────────────────────────── */
 .doppelrand-shell {
-  background: rgba(35, 49, 66, 0.04);
-  border: 1px solid rgba(35, 49, 66, 0.07);
-  border-radius: 2rem;
-  padding: 0.5rem;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
+  background: #F7F4EE;
+  border: 1px solid rgba(35, 49, 66, 0.08);
+  border-radius: 1.5rem;
+  padding: 0.375rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.3s ease;
 }
+
 .doppelrand-shell:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(35, 49, 66, 0.09), 0 8px 20px rgba(35, 49, 66, 0.04);
-  border-color: rgba(178, 34, 34, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(35, 49, 66, 0.18);
+  box-shadow: 0 4px 16px rgba(35, 49, 66, 0.05);
 }
 
 .doppelrand-shell-dark {
-  background: rgba(255, 255, 255, 0.04);
+  background: #1A242F;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 2rem;
-  padding: 0.5rem;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
+  border-radius: 1.5rem;
+  padding: 0.375rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.3s ease;
 }
+
 .doppelrand-shell-dark:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
-  border-color: rgba(178, 34, 34, 0.3);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .doppelrand-core {
   background: #ffffff;
-  border-radius: calc(2rem - 0.5rem);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 12px rgba(35, 49, 66, 0.03);
+  border-radius: calc(1.5rem - 0.375rem);
   height: 100%;
 }
 
 .doppelrand-core-dark {
-  background: #1A242F;
-  border-radius: calc(2rem - 0.5rem);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 4px 20px rgba(0, 0, 0, 0.25);
+  background: #233142;
+  border-radius: calc(1.5rem - 0.375rem);
   height: 100%;
 }
 
 /* ─────────────────────────────────────────
-   BUTTON-IN-BUTTON (NESTED CTA) ARCHITECTURE
+   FLAT MINIMAL BUTTON ARCHITECTURE
 ───────────────────────────────────────── */
 .btn-pill-accent {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 0.625rem 0.5rem 1.625rem;
+  padding: 0.625rem 0.75rem 0.625rem 1.625rem;
   border-radius: 9999px;
   background: #B22222;
   color: #EDE8DF;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              background-color 0.3s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease;
   border: none;
   cursor: pointer;
   outline: none;
   user-select: none;
 }
+
 .btn-pill-accent:hover {
   background: #991B1B;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(178, 34, 34, 0.3);
+  transform: translateY(-1px);
 }
+
 .btn-pill-accent:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn-pill-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 0.625rem 0.5rem 1.625rem;
+  padding: 0.625rem 0.75rem 0.625rem 1.625rem;
   border-radius: 9999px;
   background: #233142;
   color: #EDE8DF;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              background-color 0.3s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease;
   border: none;
   cursor: pointer;
   outline: none;
   user-select: none;
 }
+
 .btn-pill-primary:hover {
   background: #1A242F;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(35, 49, 66, 0.22);
+  transform: translateY(-1px);
 }
+
 .btn-pill-primary:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn-pill-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 0.625rem 0.5rem 1.625rem;
+  padding: 0.625rem 0.75rem 0.625rem 1.625rem;
   border-radius: 9999px;
   background: transparent;
-  border: 1.5px solid rgba(35, 49, 66, 0.2);
+  border: 1px solid rgba(35, 49, 66, 0.2);
   color: #233142;
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   outline: none;
   user-select: none;
 }
+
 .btn-pill-ghost:hover {
-  border-color: rgba(35, 49, 66, 0.6);
-  background: rgba(35, 49, 66, 0.05);
+  border-color: rgba(35, 49, 66, 0.5);
+  background: rgba(35, 49, 66, 0.04);
   transform: translateY(-1px);
 }
+
 .btn-pill-ghost:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn-pill-icon {
-  width: 2.125rem;
-  height: 2.125rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s ease;
 }
+
 .btn-pill-accent:hover .btn-pill-icon,
 .btn-pill-primary:hover .btn-pill-icon {
-  transform: scale(1.08) translate(1px, -1px);
+  transform: translate(1px, -1px);
 }
+
 .btn-pill-ghost .btn-pill-icon {
   background: rgba(35, 49, 66, 0.08);
 }
+
 .btn-pill-ghost:hover .btn-pill-icon {
-  transform: scale(1.08) translate(1px, -1px);
+  transform: translate(1px, -1px);
 }
 
 /* ─────────────────────────────────────────
-   ANIMATION & SCROLL REVEAL UTILITIES
+   SUBTLE MICROINTERACTIONS
 ───────────────────────────────────────── */
 .stagger-up {
   opacity: 0;
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 .hover-lift {
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
 }
+
 .hover-lift:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 22px 50px rgba(35, 49, 66, 0.1), 0 8px 20px rgba(35, 49, 66, 0.04);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(35, 49, 66, 0.06);
 }
 
 /* ─────────────────────────────────────────
-   GLASSMORPHISM (FIXED/CONTAINED ONLY)
-───────────────────────────────────────── */
-.glass {
-  background: rgba(237, 232, 223, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(35, 49, 66, 0.08);
-}
-
-.glass-dark {
-  background: rgba(35, 49, 66, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(237, 232, 223, 0.08);
-}
-
-/* ─────────────────────────────────────────
-   EDITORIAL DIVIDERS
+   CLEAN SOLID SURFACES & HAIRLINE DIVIDERS
 ───────────────────────────────────────── */
 .editorial-line {
   height: 1px;
@@ -300,44 +312,47 @@ h1, h2, h3, h4, .font-editorial {
 .editorial-line-light {
   height: 1px;
   background-color: #EDE8DF;
-  opacity: 0.1;
+  opacity: 0.08;
   width: 100%;
 }
 
 /* ─────────────────────────────────────────
-   SECTION SPACING (MACRO WHITESPACE)
+   SECTION SPACING & TYPOGRAPHY MEASURE
 ───────────────────────────────────────── */
 .section-spacer {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 @media (min-width: 1024px) {
   .section-spacer {
-    padding-top: 9rem;
-    padding-bottom: 9rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 }
 
 /* ─────────────────────────────────────────
-   FOCUS INDICATOR & ACCENTS
+   FOCUS & ACCENTS
 ───────────────────────────────────────── */
 *:focus-visible {
   outline: 2px solid #B22222;
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #EDE8DF;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(35, 49, 66, 0.18);
   border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(35, 49, 66, 0.35);
 }
@@ -347,3 +362,62 @@ h1, h2, h3, h4, .font-editorial {
   color: #EDE8DF;
 }
 
+/* ─────────────────────────────────────────
+   HIGH-END FORM INPUT STYLING
+───────────────────────────────────────── */
+.input-premium {
+  width: 100%;
+  background-color: #FAF8F5;
+  border: 1px solid rgba(35, 49, 66, 0.14);
+  border-radius: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.875rem;
+  color: #233142;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.input-premium:hover {
+  border-color: rgba(35, 49, 66, 0.28);
+  background-color: #FFFFFF;
+}
+
+.input-premium:focus {
+  border-color: #B22222;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(178, 34, 34, 0.12);
+}
+
+.input-premium::placeholder {
+  color: #57606F;
+  opacity: 0.55;
+}
+
+.contact-line-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(35, 49, 66, 0.14);
+  border-radius: 0;
+  padding: 0.6rem 0 0.85rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.875rem;
+  color: #233142;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-line-input:hover {
+  border-bottom-color: rgba(35, 49, 66, 0.32);
+}
+
+.contact-line-input:focus {
+  border-bottom-color: #B22222;
+  background: linear-gradient(to bottom, transparent 70%, rgba(178, 34, 34, 0.045));
+}
+
+.contact-line-input::placeholder {
+  color: #57606F;
+  opacity: 0.55;
+}

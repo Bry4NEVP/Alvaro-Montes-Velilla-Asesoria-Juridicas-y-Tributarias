@@ -30,11 +30,11 @@ export const Practice: React.FC<PracticeProps> = ({ services, setCurrentRoute, s
     : services.filter(s => s.businessUnit === activeFilter);
 
   const filters: { label: string; value: typeof activeFilter; icon?: any }[] = [
-    { label: 'Todas las Prácticas', value: 'all' },
-    { label: 'Área Legal', value: 'legal', icon: <Scale className="h-4 w-4" /> },
+    { label: 'Todas las Áreas', value: 'all' },
+    { label: 'Área Jurídica', value: 'legal', icon: <Scale className="h-4 w-4" /> },
     { label: 'Área Tributaria', value: 'tax', icon: <TrendingUp className="h-4 w-4" /> },
     { label: 'Área Contable', value: 'accounting', icon: <FileCheck className="h-4 w-4" /> },
-    { label: 'Protección de Riesgos', value: 'insurance', icon: <Shield className="h-4 w-4" /> },
+    { label: 'Área de Seguros', value: 'insurance', icon: <Shield className="h-4 w-4" /> },
   ];
 
   return (
@@ -43,10 +43,10 @@ export const Practice: React.FC<PracticeProps> = ({ services, setCurrentRoute, s
       <section className="pt-16 max-w-3xl space-y-6 stagger-up">
         <span className="text-xs font-bold uppercase tracking-widest text-corporate-red">NUESTROS SERVICIOS</span>
         <h1 className="font-editorial text-5xl md:text-7xl font-semibold text-deep-slate-blue leading-none">
-          Especialidades Médicas del Negocio
+          Áreas de asesoría integral
         </h1>
         <p className="text-lg text-soft-slate leading-relaxed font-sans font-light">
-          Ofrecemos un espectro de asesoramiento diseñado para proteger y escalar corporaciones en mercados altamente competitivos y con marcos regulatorios exigentes.
+          Acompañamos a personas naturales y empresas en asuntos jurídicos, contables, tributarios y de seguros, con atención clara, oportuna y responsable.
         </p>
       </section>
 
@@ -77,7 +77,7 @@ export const Practice: React.FC<PracticeProps> = ({ services, setCurrentRoute, s
       <section className="stagger-up" style={{ animationDelay: '200ms' }}>
         {filteredServices.length === 0 ? (
           <div className="text-center py-20 bg-white border border-deep-slate-blue/5 rounded-2xl">
-            <p className="text-soft-slate text-sm font-sans font-light">No se encontraron servicios en esta categoría.</p>
+            <p className="text-soft-slate text-sm font-sans font-light">No se encontraron servicios en esta área.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

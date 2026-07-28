@@ -309,10 +309,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentRoute, services,
                       <td className="py-3 text-right"><button onClick={() => handleAction('Modificar permisos de A. Alvarado')} className="text-corporate-red hover:underline font-semibold">Editar</button></td>
                     </tr>
                     <tr>
-                      <td className="py-3 font-semibold text-deep-slate-blue">Beatriz Montes</td>
+                      <td className="py-3 font-semibold text-deep-slate-blue">Pablo Montes</td>
                       <td className="py-3">Editor Principal Tributario</td>
                       <td className="py-3"><span className="text-emerald-600 font-bold">Lectura y Escritura</span></td>
-                      <td className="py-3 text-right"><button onClick={() => handleAction('Modificar permisos de B. Montes')} className="text-corporate-red hover:underline font-semibold">Editar</button></td>
+                      <td className="py-3 text-right"><button onClick={() => handleAction('Modificar permisos de P. Montes')} className="text-corporate-red hover:underline font-semibold">Editar</button></td>
                     </tr>
                     <tr>
                       <td className="py-3 font-semibold text-deep-slate-blue">Eduardo Gómez</td>

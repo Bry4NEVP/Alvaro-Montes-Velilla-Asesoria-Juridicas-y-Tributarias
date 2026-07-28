@@ -1,238 +1,96 @@
 import { Service, TeamMember, Article, Resource, FAQItem, Testimonial } from './types';
 
 export const SERVICES: Service[] = [
-  // LEGAL
   {
-    id: 'corporate-law',
-    title: 'Derecho Corporativo y Comercial',
-    description: 'Asesoría integral para la constitución, estructuración, fusiones y gobierno corporativo de empresas nacionales y extranjeras.',
+    id: 'area-juridica',
+    title: 'Área Jurídica',
+    description: 'Asesoría en derecho familiar, civil, acciones de tutela, derechos de petición, demandas, reportes en centrales de riesgo, comparendos y fotomultas.',
     details: [
-      'Constitución y reorganización de sociedades y consorcios comerciales.',
-      'Elaboración, revisión y negociación de contratos comerciales locales e internacionales.',
-      'Diseño y ejecución de protocolos de gobierno corporativo y sucesiones familiares.',
-      'Asesoría en cumplimiento normativo y prevención de riesgos corporativos.'
+      'Derecho familiar y derecho civil.',
+      'Acciones de tutela y derechos de petición.',
+      'Demandas y reportes en centrales de riesgo.',
+      'Comparendos, fotomultas y levantamiento de tierras en el RUPTA.'
     ],
     businessUnit: 'legal',
     iconName: 'Scale',
     benefits: [
-      'Mitigación activa de riesgos contractuales y de gobernanza.',
-      'Estructuras societarias optimizadas para levantamiento de capital.',
-      'Tratamiento legal alineado al 100% con los objetivos de negocio.'
+      'Atención clara y personalizada para la protección de derechos.',
+      'Prevención de riesgos legales mediante orientación oportuna.',
+      'Acompañamiento responsable durante cada etapa del trámite.'
     ],
     deliverables: [
-      'Estudios de factibilidad legal y viabilidad de contratos.',
-      'Actas de junta directiva, asamblea y estatutos sociales.',
-      'Informes trimestrales de cumplimiento normativo (Compliance).'
+      'Revisión del caso y orientación sobre pasos a seguir.',
+      'Preparación o revisión de solicitudes, derechos de petición y soportes.',
+      'Seguimiento de trámites, demandas o reclamaciones cuando aplique.'
     ]
   },
   {
-    id: 'mergers-acquisitions',
-    title: 'Fusiones y Adquisiciones (M&A)',
-    description: 'Gestión y estructuración legal de transacciones complejas, auditorías legales (Due Diligence) e integraciones corporativas.',
+    id: 'area-contable',
+    title: 'Área Contable',
+    description: 'Respaldo técnico y normativo para una correcta gestión financiera y contable, con servicios de contaduría, revisión fiscal y auditoría forense.',
     details: [
-      'Auditoría legal (Due Diligence) de empresas objetivo.',
-      'Estructuración legal y fiscal de compraventas de acciones o activos.',
-      'Diseño de pactos de socios, acuerdos preliminares y cláusulas de salida.',
-      'Obtención de autorizaciones ante entes reguladores y de competencia.'
-    ],
-    businessUnit: 'legal',
-    iconName: 'Briefcase',
-    benefits: [
-      'Identificación temprana de contingencias ocultas o pasivos ambientales.',
-      'Optimización de la valoración comercial mediante cláusulas de garantía.',
-      'Transición suave y estructurada post-adquisición.'
-    ],
-    deliverables: [
-      'Reporte integral de Due Diligence legal.',
-      'Contrato de Compraventa de Acciones (SPA) y acuerdos de accionistas.',
-      'Cronograma y protocolos de integración transaccional.'
-    ]
-  },
-  {
-    id: 'intellectual-property',
-    title: 'Propiedad Intelectual y Tecnología',
-    description: 'Protección integral de marcas, patentes, derechos de autor y regulación de software y plataformas digitales.',
-    details: [
-      'Registro y defensa de marcas, lemas comerciales y denominaciones de origen.',
-      'Redacción de contratos de licencia, franquicia y transferencia de tecnología.',
-      'Asesoría en protección de datos personales y políticas de privacidad (Habeas Data).',
-      'Estructuración legal de startups, plataformas e-commerce y contratos SaaS.'
-    ],
-    businessUnit: 'legal',
-    iconName: 'ShieldCheck',
-    benefits: [
-      'Blindaje de activos intangibles de alto valor de la empresa.',
-      'Cumplimiento estricto de las leyes de protección de datos.',
-      'Habilitación de modelos de negocio digitales altamente escalables.'
-    ],
-    deliverables: [
-      'Títulos de registro marcario y reportes de búsqueda fonética.',
-      'Políticas de privacidad y términos y condiciones web/App.',
-      'Contratos de cesión de propiedad intelectual de desarrolladores.'
-    ]
-  },
-  // TAX
-  {
-    id: 'tax-planning',
-    title: 'Planeación Tributaria Estratégica',
-    description: 'Optimización legal de la carga impositiva mediante un profundo análisis de la normativa nacional y sectorial.',
-    details: [
-      'Diagnóstico fiscal de la estructura operativa corporativa.',
-      'Evaluación de beneficios, deducciones y exenciones tributarias sectoriales.',
-      'Diseño de modelos de eficiencia tributaria para utilidades e inversiones.',
-      'Preparación para auditorías preventivas frente a la administración de impuestos.'
-    ],
-    businessUnit: 'tax',
-    iconName: 'TrendingUp',
-    benefits: [
-      'Reducción de costos fiscales dentro de la estricta legalidad.',
-      'Previsibilidad del flujo de caja destinado a obligaciones tributarias.',
-      'Evitación de sanciones, intereses moratorios y procesos de cobro coactivo.'
-    ],
-    deliverables: [
-      'Matriz de planeación tributaria anual con calendario de ejecución.',
-      'Opiniones legales de viabilidad sobre estructuras de inversión.',
-      'Reporte de oportunidades de optimización fiscal detectadas.'
-    ]
-  },
-  {
-    id: 'cross-border-taxation',
-    title: 'Fiscalidad Internacional y Precios de Transferencia',
-    description: 'Asesoramiento tributario en operaciones transfronterizas, tratados para evitar la doble imposición y obligaciones cambiarias.',
-    details: [
-      'Aplicación de convenios de doble imposición (CDI) y retenciones en la fuente.',
-      'Elaboración de estudios de precios de transferencia y declaraciones informativas.',
-      'Estructuración fiscal de inversiones extranjeras en el país y viceversa.',
-      'Asesoría en el cumplimiento de regímenes cambiarios e inversiones internacionales.'
-    ],
-    businessUnit: 'tax',
-    iconName: 'Globe',
-    benefits: [
-      'Evitación de la doble tributación en múltiples jurisdicciones.',
-      'Soporte robusto ante revisiones de precios de transferencia.',
-      'Seguridad jurídica en el giro y recepción de divisas internacionales.'
-    ],
-    deliverables: [
-      'Estudio de precios de transferencia firmado por especialista.',
-      'Conceptos de tributación sobre pagos al exterior por servicios y regalías.',
-      'Declaraciones cambiarias estructuradas.'
-    ]
-  },
-  {
-    id: 'tax-disputes',
-    title: 'Defensa y Litigio Tributario',
-    description: 'Representación legal ante requerimientos, liquidaciones oficiales y procesos de cobro coactivo de la administración de impuestos.',
-    details: [
-      'Atención y respuesta técnica a requerimientos ordinarios y especiales.',
-      'Redacción y radicación de recursos de reconsideración en vía gubernativa.',
-      'Representación judicial ante la jurisdicción contencioso-administrativa.',
-      'Estrategias de mediación, conciliación y acuerdos de pago.'
-    ],
-    businessUnit: 'tax',
-    iconName: 'FileText',
-    benefits: [
-      'Defensa técnica calificada frente a actuaciones fiscales desproporcionadas.',
-      'Disminución del riesgo de embargos de cuentas o activos.',
-      'Acompañamiento por abogados con doble perfil (tributarista e internacional).'
-    ],
-    deliverables: [
-      'Proyectos de respuesta a pliegos de cargos o liquidaciones.',
-      'Demandas de nulidad y restablecimiento del derecho formuladas.',
-      'Informes periódicos del estado de los procesos judiciales.'
-    ]
-  },
-  // ACCOUNTING
-  {
-    id: 'audit-assurance',
-    title: 'Auditoría y Aseguramiento Financiero',
-    description: 'Evaluación independiente de estados financieros bajo normas locales e internacionales (NIIF/IFRS) para inversionistas y reguladores.',
-    details: [
-      'Auditoría externa de estados financieros anuales o intermedios.',
-      'Revisoría fiscal estatutaria obligatoria o voluntaria.',
-      'Evaluación del sistema de control interno y mitigación de riesgos operativos.',
-      'Emisión de dictámenes y certificaciones financieras para licitaciones.'
+      'Contaduría pública.',
+      'Revisión fiscal.',
+      'Auditoría forense.',
+      'Impuestos tributarios.'
     ],
     businessUnit: 'accounting',
     iconName: 'FileCheck',
     benefits: [
-      'Alta confiabilidad de las cifras para bancos, socios y terceros.',
-      'Identificación de fallas en el control interno que puedan derivar en fraudes.',
-      'Garantía de cumplimiento con los entes de supervisión societaria.'
+      'Gestión financiera y contable con respaldo técnico.',
+      'Información organizada para tomar decisiones responsables.',
+      'Acompañamiento normativo en obligaciones contables y fiscales.'
     ],
     deliverables: [
-      'Dictamen del auditor sobre los estados financieros.',
-      'Carta de recomendaciones a la gerencia sobre control interno.',
-      'Certificados de cumplimiento de covenants financieros.'
+      'Diagnóstico contable según el requerimiento del cliente.',
+      'Soporte en revisión fiscal y auditoría forense.',
+      'Orientación sobre impuestos tributarios aplicables.'
     ]
   },
   {
-    id: 'accounting-outsourcing',
-    title: 'Outsourcing Contable y BPO Financiero',
-    description: 'Gestión externa del procesamiento contable diario, conciliaciones, facturación electrónica y presentación de informes.',
+    id: 'area-tributaria',
+    title: 'Área Tributaria',
+    description: 'Asesoría estratégica para el cumplimiento adecuado de obligaciones fiscales: renta, retenciones en la fuente, industria y comercio, IVA y emplazamientos.',
     details: [
-      'Registro contable sistematizado bajo estándares NIIF (IFRS).',
-      'Conciliaciones bancarias, de cartera, proveedores e inventarios.',
-      'Liquidación mensual de impuestos locales, nacionales y retenciones.',
-      'Preparación de estados financieros mensuales y reportes gerenciales.'
+      'Declaraciones de renta.',
+      'Retenciones en la fuente.',
+      'Industria y comercio.',
+      'IVA y emplazamientos tributarios.'
     ],
-    businessUnit: 'accounting',
-    iconName: 'Layers',
+    businessUnit: 'tax',
+    iconName: 'TrendingUp',
     benefits: [
-      'Reducción de costos de personal contable interno y licencias de software.',
-      'Contabilidad mantenida al día y libre de errores materiales.',
-      'Acceso a reportes y tableros financieros en tiempo real.'
+      'Cumplimiento oportuno de obligaciones fiscales.',
+      'Claridad frente a requerimientos y emplazamientos tributarios.',
+      'Acompañamiento estratégico para personas naturales y empresas.'
     ],
     deliverables: [
-      'Balance General, Estado de Resultados y notas contables mensuales.',
-      'Borradores de declaraciones tributarias listas para firma.',
-      'Reportes de antigüedad de cartera e informes de tesorería.'
+      'Revisión de obligaciones tributarias.',
+      'Orientación para declaraciones y retenciones.',
+      'Acompañamiento frente a industria y comercio, IVA y emplazamientos.'
     ]
   },
-  // INSURANCE
   {
-    id: 'corporate-liability',
-    title: 'Seguros de Responsabilidad Civil y Directores (D&O)',
-    description: 'Protección patrimonial para la empresa y sus administradores frente a reclamaciones por decisiones de negocio u operaciones operativas.',
+    id: 'area-seguros',
+    title: 'Área de Seguros',
+    description: 'Acompañamiento en venta de pólizas, reclamaciones SOAT, ADRES, responsabilidad civil, bonos pensionales, pensiones sustitutivas y calificación de invalidez.',
     details: [
-      'Estructuración de pólizas de directores y administradores (D&O).',
-      'Seguros de responsabilidad civil extracontractual para operaciones y predios.',
-      'Coberturas de errores y omisiones (E&O) para empresas de servicios.',
-      'Asistencia y representación en reclamaciones de siniestros complejos.'
+      'Venta de pólizas de seguros.',
+      'Reclamaciones SOAT, ADRES y pólizas de responsabilidad civil.',
+      'Acompañamiento en calificación de invalidez.',
+      'Reclamación de bonos pensionales y pensiones sustitutivas.'
     ],
     businessUnit: 'insurance',
     iconName: 'Shield',
     benefits: [
-      'Protección del patrimonio personal de los directivos clave.',
-      'Respaldo financiero para afrontar costosos gastos de defensa jurídica.',
-      'Cumplimiento con requisitos de contratación pública y privada.'
+      'Orientación clara para gestionar reclamaciones y solicitudes.',
+      'Acompañamiento documental durante el proceso correspondiente.',
+      'Apoyo en trámites relacionados con protección y cobertura.'
     ],
     deliverables: [
-      'Análisis comparativo de pólizas del mercado (Benchmarking).',
-      'Manual de procedimiento para notificación de siniestros.',
-      'Contratos de seguro estructurados con condiciones preferenciales.'
-    ]
-  },
-  {
-    id: 'asset-protection',
-    title: 'Protección de Activos y Seguros de Propiedad',
-    description: 'Evaluación de riesgos y colocación de pólizas de daños materiales, lucro cesante e infraestructura física corporativa.',
-    details: [
-      'Auditoría de riesgos de infraestructura y cadena de suministro.',
-      'Pólizas multirriesgo industrial para maquinaria, existencias e inmuebles.',
-      'Seguro de lucro cesante (pérdida de beneficios por paralización de planta).',
-      'Estructuras de fideicomisos y seguros combinados para grandes patrimonios.'
-    ],
-    businessUnit: 'insurance',
-    iconName: 'Home',
-    benefits: [
-      'Garantía de continuidad operativa ante desastres naturales o incendios.',
-      'Tasas de deducibles equilibradas según el perfil de riesgo real.',
-      'Integración con planeación sucesoria y familiar de socios.'
-    ],
-    deliverables: [
-      'Informe técnico de inspección y valoración de riesgos.',
-      'Programa integral de seguros empresariales.',
-      'Certificados de cobertura para entidades financieras.'
+      'Revisión del caso y documentos soporte.',
+      'Orientación sobre pólizas, reclamaciones y trámites aplicables.',
+      'Seguimiento del requerimiento según la necesidad del cliente.'
     ]
   }
 ];
@@ -241,32 +99,32 @@ export const TEAM: TeamMember[] = [
   {
     id: 'alberto-alvarado',
     name: 'Dr. Alberto Alvarado',
-    role: 'Socio Fundador - Área Jurídica',
-    bio: 'Con más de 25 años de experiencia, el Dr. Alvarado es un referente en derecho corporativo y arbitraje comercial. Ha asesorado a más de 100 empresas transnacionales en su establecimiento y fusiones.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600',
+    role: 'Área Jurídica',
+    bio: 'Acompañamiento en asuntos familiares, civiles y administrativos, con énfasis en la prevención de riesgos legales, la defensa de derechos y la orientación clara para cada cliente.',
+    image: 'AlvaradoImg.png',
     businessUnit: 'legal',
-    credentials: ['Doctor en Derecho (LL.D.) - Universidad Externado', 'Master en Derecho Comercial (LL.M.) - Harvard Law School', 'Árbitro de la Cámara de Comercio'],
-    email: 'a.alvarado@amv.com.co'
+    credentials: ['Derecho familiar y civil', 'Tutelas, derechos de petición y demandas', 'Centrales de riesgo, comparendos, fotomultas y RUPTA'],
+    email: 'velmonasesorias.jct@gmail.com'
   },
   {
-    id: 'beatriz-montes',
-    name: 'Dra. Beatriz Montes',
-    role: 'Socia Principal - Área Tributaria',
-    bio: 'Especialista en planeación fiscal y reestructuraciones corporativas complejas. Ex-asesora técnica del Ministerio de Hacienda y conferencista internacional en tributación de la OCDE.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600',
+    id: 'pablo-montes',
+    name: 'Dr. Pablo Montes',
+    role: 'Área Tributaria',
+    bio: 'Asesoría estratégica para el cumplimiento adecuado de obligaciones fiscales, con atención en declaraciones de renta, retenciones, industria y comercio, IVA y emplazamientos tributarios.',
+    image: 'MontesImg.png',
     businessUnit: 'tax',
-    credentials: ['Especialista en Tributación - Universidad de los Andes', 'Máster en Tributación Internacional - Universidad de Navarra', 'Miembro del Instituto Colombiano de Derecho Tributario (ICDT)'],
-    email: 'b.montes@amv.com.co'
+    credentials: ['Declaraciones de renta', 'Retenciones en la fuente e IVA', 'Industria y comercio y emplazamientos tributarios'],
+    email: 'velmonasesorias.jct@gmail.com'
   },
   {
     id: 'carlos-velilla',
     name: 'Dr. Carlos Velilla',
-    role: 'Socio Director - Área Contable y Auditoría',
-    bio: 'Experto en implementación NIIF/IFRS y auditoría forense. Cuenta con amplia trayectoria liderando equipos de auditoría interna en firmas Big Four en Latinoamérica.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600',
+    role: 'Área Contable y Seguros',
+    bio: 'Respaldo técnico para la gestión financiera y contable, junto con acompañamiento en pólizas, reclamaciones SOAT, ADRES y procesos relacionados con invalidez y protección patrimonial.',
+    image: 'VelillaImg.png',
     businessUnit: 'accounting',
-    credentials: ['Contador Público - Universidad Nacional', 'Especialista en Revisoría Fiscal - Universidad Javeriana', 'Certificación Internacional NIIF - ACCA Association'],
-    email: 'c.velilla@amv.com.co'
+    credentials: ['Contaduría pública y revisión fiscal', 'Auditoría forense e impuestos tributarios', 'Pólizas, SOAT, ADRES y responsabilidad civil'],
+    email: 'velmonasesorias.jct@gmail.com'
   },
   {
     id: 'diana-restrepo',
@@ -303,69 +161,46 @@ export const TEAM: TeamMember[] = [
 export const ARTICLES: Article[] = [
   {
     id: 'tax-reform-2026',
-    title: 'Impacto de la Reforma Tributaria 2026 en las Sociedades Anónimas y SAS',
-    summary: 'Un desglose analítico sobre los cambios en la tarifa nominal de renta, el impuesto a los dividendos y las nuevas normas de subcapitalización vigentes desde este año fiscal.',
-    content: `La reciente aprobación de la Ley de Finanzas Públicas e Impulso al Crecimiento (Reforma Tributaria 2026) introduce cambios estructurales de gran calado para el sector empresarial en el país. En este artículo, nuestro equipo tributario analiza los tres pilares más críticos que las Juntas Directivas de las Sociedades Anónimas (S.A.) y Sociedades por Acciones Simplificadas (S.A.S.) deben evaluar de inmediato para reestructurar sus flujos de caja y proyecciones de rentabilidad corporativa.
+    title: 'Cuándo solicitar asesoría tributaria',
+    summary: 'Una guía breve para identificar cuándo conviene buscar apoyo en renta, retenciones en la fuente, IVA, industria y comercio o emplazamientos tributarios.',
+    content: `La asesoría tributaria preventiva ayuda a cumplir adecuadamente las obligaciones fiscales y a responder con orden ante requerimientos de la autoridad competente.
 
-### 1. Ajuste Gradual en la Tarifa Nominal del Impuesto sobre la Renta
-La reforma propone un esquema diferencial en las tarifas de renta según el tamaño de la compañía, buscando aliviar a las micro y pequeñas empresas pero consolidando una tasa del 34% para corporaciones con rentas gravables superiores a un millón de UVT. La planeación tributaria preventiva se vuelve la única herramienta legal para optimizar las deducciones permitidas por inversiones en I+D+i y transición energética.
-
-> "La planeación impositiva ya no es un ejercicio de fin de año; debe incorporarse en el diseño de cada transacción comercial mensual." - Dra. Beatriz Montes
-
-### 2. Impuesto sobre Dividendos y Retenciones en la Fuente
-Se eleva la tarifa de retención sobre dividendos distribuidos a socios residentes naturales del 15% al 20%. Esto obliga a revisar las políticas de capitalización de utilidades dentro de los estatutos empresariales y los pactos de socios para evaluar alternativas de capitalización de reservas libres de gravamen o desinversiones estructuradas.
-
-### 3. Fortalecimiento de las Reglas de Subcapitalización (Under-capitalization)
-Se restringe la deducibilidad de gastos financieros asociados a deudas contraídas directa o indirectamente con vinculados económicos que excedan un ratio de 1.5:1 en relación con el patrimonio líquido del contribuyente en el año inmediatamente anterior. Toda financiación intragrupo debe contar con un análisis de Precios de Transferencia y tasas estructuradas bajo el principio de plena competencia (Arm's Length Principles).`,
+En Alvarado Montes Velilla acompañamos a personas naturales y empresas en declaraciones de renta, retenciones en la fuente, industria y comercio, IVA y emplazamientos tributarios, con información clara y seguimiento responsable.`,
     category: 'Tributaria',
-    author: 'Dra. Beatriz Montes',
-    date: '10 Jun 2026',
-    readTime: '6 min read',
+    author: 'Alvarado Montes Velilla',
+    date: '10 Oct 2025',
+    readTime: '4 min read',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800',
     featured: true,
-    tags: ['Reforma Tributaria', 'Renta Corporativa', 'Dividendos', 'SAS']
+    tags: ['Declaración de renta', 'Retenciones', 'IVA', 'Industria y comercio']
   },
   {
     id: 'm-a-due-diligence-errors',
-    title: 'Los 5 Errores Fatales en un Proceso de Due Diligence en Adquisiciones',
-    summary: 'Evite contingencias millonarias identificando de antemano pasivos laborales latentes, marcas desprotegidas y vacíos de cumplimiento de datos en la empresa objetivo.',
-    content: `Adquirir una compañía o realizar una fusión es un paso estratégico emocionante pero lleno de campos minados legales. Un proceso de Auditoría Legal (Due Diligence) superficial o enfocado únicamente en los balances financieros puede costar millones de dólares en contingencias post-cierre. 
+    title: 'Asuntos jurídicos que requieren atención oportuna',
+    summary: 'Tutelas, derechos de petición, demandas, centrales de riesgo, comparendos y trámites en RUPTA requieren claridad, soporte documental y seguimiento.',
+    content: `Los asuntos jurídicos cotidianos pueden afectar derechos, patrimonio y tranquilidad si no se atienden a tiempo.
 
-A continuación, delineamos los 5 errores legales y contables más comunes que hemos detectado en nuestra práctica de M&A y cómo blindar su inversión:
-
-### 1. Ignorar Pasivos Laborales Ocultos
-Muchas startups u organizaciones familiares estructuran sus contrataciones bajo contratos civiles de prestación de servicios para roles que cumplen con subordinación directa. Post-adquisición, esto se traduce en demandas por reajustes prestacionales, sanciones de seguridad social e indemnizaciones retroactivas masivas.
-
-### 2. No Verificar la Titularidad de la Propiedad Intelectual
-Es común asumir que si la empresa desarrolló un software, esta posee los derechos. Sin embargo, si los contratos laborales de los ingenieros o proveedores externos no cuentan con cláusulas robustas de transferencia y cesión exclusiva de propiedad intelectual, los derechos siguen perteneciendo a las personas naturales creadoras.
-
-### 3. Pasar por alto el Cumplimiento de Datos Personales (Habeas Data)
-En la economía digital, una base de datos de usuarios puede ser el activo más valioso. Si dicha base no se recopiló con autorizaciones expresas e irrevocables para su transferencia a terceros corporativos, esta se vuelve inutilizable legalmente tras la adquisición bajo riesgo de multas regulatorias catastróficas.`,
-    category: 'Derecho Corporativo',
-    author: 'Dr. Alberto Alvarado',
-    date: '28 May 2026',
-    readTime: '8 min read',
+La firma brinda acompañamiento en derecho familiar, derecho civil, tutelas, derechos de petición, demandas, reportes en centrales de riesgo, comparendos, fotomultas y levantamiento de tierras en el RUPTA.`,
+    category: 'Área Jurídica',
+    author: 'Alvarado Montes Velilla',
+    date: '10 Oct 2025',
+    readTime: '4 min read',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800',
-    tags: ['M&A', 'Due Diligence', 'Propiedad Intelectual', 'Compliance']
+    tags: ['Tutelas', 'Derechos de petición', 'Demandas', 'Centrales de riesgo']
   },
   {
     id: 'forensic-accounting-prevention',
-    title: 'Auditoría Forense: Cómo Detectar Red Flags Financieros en su Compañía',
-    summary: 'Aprenda metodologías clave y herramientas de análisis interno para proteger los flujos de tesorería y garantizar un control interno a prueba de fraudes.',
-    content: `El fraude corporativo no siempre se manifiesta en grandes desfalcos mediáticos. La mayoría de las fugas de capital ocurren de manera silenciosa mediante pequeños desvíos sistemáticos en reembolsos, facturas ficticias de proveedores de servicios falsos, o manipulaciones contables sutiles.
+    title: 'Importancia del respaldo contable',
+    summary: 'La contaduría pública, la revisión fiscal, la auditoría forense y el manejo tributario ayudan a sostener una gestión financiera ordenada.',
+    content: `El acompañamiento contable permite tomar decisiones con información organizada, confiable y ajustada a las obligaciones normativas.
 
-La auditoría forense combina técnicas contables, jurídicas y de análisis de datos para indagar anomalías. En esta guía práctica explicamos los principales indicadores ("Red Flags") que todo CEO y Director Financiero debe monitorear de forma periódica.
-
-### Red Flags en Proveedores y Compras
-*   Incremento repentino de pagos a un proveedor cuyos datos básicos coinciden con los de algún colaborador interno (dirección, cuenta bancaria, teléfono).
-*   Facturas consecutivas con numeración idéntica o facturas emitidas en fines de semana o días festivos que no corresponden con la actividad operativa regular.
-*   Falta de cotizaciones comparativas previas a la aprobación de un contrato importante de servicios intangibles (consultorías, marketing, asesorías).`,
-    category: 'Contable y Auditoría',
-    author: 'Dr. Carlos Velilla',
-    date: '15 May 2026',
-    readTime: '5 min read',
+Alvarado Montes Velilla brinda respaldo técnico en contaduría pública, revisión fiscal, auditoría forense e impuestos tributarios para personas naturales y empresas.`,
+    category: 'Área Contable',
+    author: 'Alvarado Montes Velilla',
+    date: '10 Oct 2025',
+    readTime: '3 min read',
     image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=800',
-    tags: ['Auditoría Forense', 'Fraude Corporativo', 'Control Interno', 'Finanzas']
+    tags: ['Contaduría pública', 'Revisión fiscal', 'Auditoría forense', 'Impuestos']
   },
   {
     id: 'directors-liability-insurance',
@@ -473,26 +308,26 @@ export const FAQS: FAQItem[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'test-1',
-    quote: "La asesoría corporativa y tributaria de Alvarado Montes Velilla nos permitió reestructurar nuestra holding en tres países, reduciendo riesgos sustanciales y agilizando las rondas de inversión.",
-    author: "Ing. Alejandro Mendoza",
-    role: "CEO & Cofundador",
-    company: "Apex Tech Holdings Inc.",
+    quote: "La firma ofrece asesoría personalizada, clara y oportuna para prevenir riesgos legales y proteger los derechos de sus clientes.",
+    author: "Enfoque de servicio",
+    role: "Asesoría integral",
+    company: "Alvarado Montes Velilla",
     rating: 5
   },
   {
     id: 'test-2',
-    quote: "Su capacidad técnica en litigio fiscal y defensa tributaria fue decisiva para revocar una liquidación oficial injusta de la DIAN. Excelencia académica aplicada a la defensa corporativa.",
-    author: "Dra. Carolina Villegas",
-    role: "Directora Financiera",
-    company: "Grupo Logístico del Norte S.A.",
+    quote: "El ejercicio profesional se fundamenta en la ética, la responsabilidad y el conocimiento técnico aplicado a cada proceso.",
+    author: "Principios de trabajo",
+    role: "Ética y responsabilidad",
+    company: "Alvarado Montes Velilla",
     rating: 5
   },
   {
     id: 'test-3',
-    quote: "Llevamos 8 años con su Revisoría Fiscal y Auditoría Externa. La rigurosidad de sus informes y el valor agregado de su diagnóstico de control interno son invaluables.",
-    author: "Felipe Gaviria",
-    role: "Presidente de la Junta",
-    company: "Inversiones del Café S.A.S.",
+    quote: "El compromiso es brindar un servicio confiable, transparente y eficiente, orientado a la protección de los derechos y el patrimonio.",
+    author: "Compromiso institucional",
+    role: "Transparencia y eficiencia",
+    company: "Alvarado Montes Velilla",
     rating: 5
   }
 ];

@@ -93,7 +93,7 @@ function App() {
         );
       
       case 'team':
-        return <About team={TEAM} setCurrentRoute={setCurrentRoute} />;
+        return <Team team={TEAM} setCurrentRoute={setCurrentRoute} />;
       
       case 'resources':
         return (
@@ -149,7 +149,7 @@ function App() {
         );
       
       case 'testimonials':
-        return <Home setCurrentRoute={setCurrentRoute} services={SERVICES} articles={ARTICLES} testimonials={TESTIMONIALS} />;
+        return <Testimonials testimonials={TESTIMONIALS} setCurrentRoute={setCurrentRoute} />;
       
       case 'login':
         return <Login setCurrentRoute={setCurrentRoute} triggerToast={triggerToast} />;

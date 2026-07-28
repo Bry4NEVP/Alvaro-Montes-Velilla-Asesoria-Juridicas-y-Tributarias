@@ -34,8 +34,7 @@ export const Faq: React.FC<FaqProps> = ({ faqs, setCurrentRoute }) => {
       {/* ═══════════════════════════════════
           HEADER
       ═══════════════════════════════════ */}
-      <section className="relative pt-20 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-corporate-red/4 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
+      <section className="relative pt-20 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 stagger-up relative z-10">
           <div className="eyebrow justify-center">Preguntas Frecuentes</div>
           <h1 className="font-editorial text-5xl md:text-6xl font-semibold text-deep-slate-blue leading-[1.02]">
@@ -61,8 +60,8 @@ export const Faq: React.FC<FaqProps> = ({ faqs, setCurrentRoute }) => {
               }}
               className={`px-6 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-[0.12em] border cursor-pointer transition-all duration-300 focus:outline-none ${
                 activeCategory === cat.value
-                  ? 'bg-deep-slate-blue border-deep-slate-blue text-bone-white shadow-md'
-                  : 'bg-white border-deep-slate-blue/10 text-deep-slate-blue hover:border-corporate-red/30 hover:bg-corporate-red/3'
+                  ? 'bg-[#233142] border-[#233142] text-[#EDE8DF]'
+                  : 'bg-white border-[#233142]/10 text-[#233142] hover:border-[#B22222]/20 hover:bg-[#B22222]/3'
               }`}
             >
               {cat.label}
@@ -81,10 +80,10 @@ export const Faq: React.FC<FaqProps> = ({ faqs, setCurrentRoute }) => {
           return (
             <div
               key={faq.id}
-              className={`bg-white border rounded-3xl overflow-hidden transition-all duration-350 ${
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-250 ${
                 isOpen
-                  ? 'border-corporate-red/20 shadow-[0_8px_32px_rgba(178,34,34,0.08)]'
-                  : 'border-deep-slate-blue/6 shadow-[0_2px_8px_rgba(35,49,66,0.04)] hover:border-deep-slate-blue/12 hover:shadow-[0_4px_16px_rgba(35,49,66,0.06)]'
+                  ? 'border-[#B22222]/15'
+                  : 'border-[#233142]/6 hover:border-[#233142]/12'
               }`}
               style={{ animationDelay: `${idx * 40}ms` }}
             >

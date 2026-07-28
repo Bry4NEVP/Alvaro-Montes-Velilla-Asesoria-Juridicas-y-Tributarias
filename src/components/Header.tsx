@@ -73,10 +73,10 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, setCurrentRoute, o
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? 'glass shadow-[0_2px_24px_rgba(35,49,66,0.08)] -translate-y-0.5'
-          : 'bg-bone-white'
+          ? 'bg-white/95 backdrop-blur-xl shadow-[0_1px_0_rgba(35,49,66,0.08)]'
+          : 'bg-transparent'
       }`}
-      style={{ borderBottom: scrolled ? '1px solid rgba(35,49,66,0.06)' : '1px solid rgba(35,49,66,0.06)' }}
+      style={{ borderBottom: scrolled ? '1px solid rgba(35,49,66,0.06)' : '1px solid transparent' }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-[72px] items-center justify-between">
