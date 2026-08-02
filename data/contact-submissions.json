@@ -1,0 +1,49 @@
+[
+  {
+    "id": "0dc67733-e702-457c-af70-3bd361fe8854",
+    "createdAt": "2026-08-02T20:33:05.591Z",
+    "name": "bryan",
+    "email": "bryanestebanvelillaperez@gmail.com",
+    "phone": "3053482563",
+    "practiceArea": "Derecho corporativo y comercial",
+    "description": "tengo problemas corporativos dentro de mi empresa",
+    "analysis": {
+      "selectedService": "Derecho corporativo y comercial",
+      "recommendedService": "Derecho corporativo y comercial",
+      "priority": "normal",
+      "detectedKeywords": [
+        "empresa"
+      ],
+      "priorityKeywords": [],
+      "summary": "Consulta en Derecho corporativo y comercial. Área técnica recomendada: Derecho corporativo y comercial."
+    },
+    "report": {
+      "filename": "reporte-amv-0dc67733-e702-457c-af70-3bd361fe8854.pdf",
+      "path": "C:\\Users\\marie\\Projects\\ProyectoPapi\\data\\reports\\reporte-amv-0dc67733-e702-457c-af70-3bd361fe8854.pdf"
+    }
+  },
+  {
+    "id": "5c79aeb1-cf98-48da-86f7-cf3f1b706a26",
+    "createdAt": "2026-08-02T20:35:47.031Z",
+    "name": "bryan",
+    "email": "bryan@gmail.com",
+    "phone": "3053482563",
+    "practiceArea": "Consultoria tributaria",
+    "description": "trngo problemas para mi empresa",
+    "analysis": {
+      "selectedService": "Consultoria tributaria",
+      "recommendedService": "Derecho corporativo y comercial",
+      "priority": "normal",
+      "detectedKeywords": [
+        "empresa",
+        "tributaria"
+      ],
+      "priorityKeywords": [],
+      "summary": "Consulta en Consultoria tributaria. Área técnica recomendada: Derecho corporativo y comercial."
+    },
+    "report": {
+      "filename": "reporte-amv-5c79aeb1-cf98-48da-86f7-cf3f1b706a26.pdf",
+      "path": "C:\\Users\\marie\\Projects\\ProyectoPapi\\data\\reports\\reporte-amv-5c79aeb1-cf98-48da-86f7-cf3f1b706a26.pdf"
+    }
+  }
+]

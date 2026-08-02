@@ -491,14 +491,14 @@ export const Home: React.FC<HomeProps> = ({ setCurrentRoute, services, articles,
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* Header */}
-          <div className="text-center space-y-4 mb-16 reveal">
-            <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#B22222]">
+          <div className="flex flex-col items-center gap-3 mb-16 reveal text-center">
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.24em] text-[#B22222]">
               EN QUÉ NOS ENFOCAMOS
             </span>
-            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold tracking-tight text-[#233142] uppercase">
+            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold tracking-tight text-[#233142] uppercase leading-tight">
               ÁREAS DE ASESORÍA INTEGRAL
             </h2>
-            <div className="h-px w-12 bg-[#B22222] mx-auto mt-4" />
+            <div className="h-px w-12 bg-[#B22222] mx-auto mt-2" />
           </div>
 
           {/* 4 Vertical Cards Grid */}

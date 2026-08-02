@@ -93,7 +93,14 @@ export const Contact: React.FC<ContactProps> = ({ triggerToast }) => {
     setFormData((current) => ({ ...current, [field]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const [analysisResult, setAnalysisResult] = useState<{
+    id: string;
+    priority: string;
+    recommendedService: string;
+    detectedKeywords: string[];
+  } | null>(null);
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (
@@ -103,20 +110,44 @@ export const Contact: React.FC<ContactProps> = ({ triggerToast }) => {
       !formData.description.trim()
     ) {
       setStatus('error');
-      triggerToast('Complete nombre, correo, telefono y resumen del caso.', 'info');
+      triggerToast('Complete nombre, correo, teléfono y resumen del caso.', 'info');
       setTimeout(() => setStatus('default'), 2800);
       return;
     }
 
     setStatus('loading');
-    setTimeout(() => {
-      setStatus('success');
-      triggerToast('Solicitud recibida. El equipo AMV revisara su caso.', 'success');
-    }, 1300);
+
+    try {
+      const response = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.ok) {
+        setStatus('success');
+        setAnalysisResult({
+          id: result.id,
+          priority: result.analysis.priority,
+          recommendedService: result.analysis.recommendedService,
+          detectedKeywords: result.analysis.detectedKeywords,
+        });
+        triggerToast('Solicitud recibida. Dictamen PDF generado y notificado.', 'success');
+      } else {
+        setStatus('error');
+        triggerToast(result.message || 'Ocurrió un problema al enviar la solicitud.', 'info');
+      }
+    } catch {
+      setStatus('error');
+      triggerToast('No se pudo conectar con el servidor de contacto.', 'info');
+    }
   };
 
   const resetForm = () => {
     setStatus('default');
+    setAnalysisResult(null);
     setFormData({
       name: '',
       email: '',
@@ -229,20 +260,49 @@ export const Contact: React.FC<ContactProps> = ({ triggerToast }) => {
               </div>
 
               {status === 'success' ? (
-                <div className="flex min-h-[560px] flex-col items-center justify-center px-4 py-16 text-center sm:px-10">
-                  <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-full bg-[#B22222]/10 text-[#B22222] ring-1 ring-[#B22222]/20">
-                    <CheckCircle2 className="h-10 w-10" />
+                <div className="flex min-h-[560px] flex-col items-center justify-center px-4 py-12 text-center sm:px-10 space-y-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#B22222]/10 text-[#B22222] ring-1 ring-[#B22222]/20">
+                    <CheckCircle2 className="h-9 w-9" />
                   </div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#B22222]">
-                    Solicitud recibida
+                    Solicitud Radicada #{analysisResult?.id.slice(0, 8)}
                   </p>
-                  <h2 className="mt-3 max-w-xl font-serif-display text-4xl font-bold uppercase leading-tight text-[#233142] sm:text-5xl">
-                    Su caso ya esta en revision preliminar.
+                  <h2 className="max-w-xl font-serif-display text-3xl font-bold uppercase leading-tight text-[#233142] sm:text-4xl">
+                    Dictamen automático preliminar generado
                   </h2>
-                  <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-[#57606F]">
-                    Enviaremos la confirmacion a {formData.email}. Su solicitud sera asignada segun el area de {formData.practiceArea.toLowerCase()}.
+                  <p className="max-w-lg text-xs font-light leading-relaxed text-[#57606F]">
+                    Se ha enviado un resumen y reporte en PDF a <strong>{formData.email}</strong>. 
                   </p>
-                  <button type="button" onClick={resetForm} className="btn-pill-accent mt-9">
+
+                  {/* Resumen del Análisis Automático */}
+                  {analysisResult && (
+                    <div className="w-full text-left rounded-2xl bg-white border border-[#233142]/10 p-5 space-y-3 shadow-xs">
+                      <div className="flex items-center justify-between text-xs border-b border-slate-100 pb-2">
+                        <span className="text-slate-500 font-medium">Área Sugerida:</span>
+                        <span className="font-bold text-deep-slate-blue">{analysisResult.recommendedService}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs border-b border-slate-100 pb-2">
+                        <span className="text-slate-500 font-medium">Nivel de Prioridad:</span>
+                        <span className={`font-bold px-2 py-0.5 rounded ${analysisResult.priority === 'alta' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-700'}`}>
+                          {analysisResult.priority.toUpperCase()}
+                        </span>
+                      </div>
+                      {analysisResult.detectedKeywords.length > 0 && (
+                        <div className="text-xs pt-1">
+                          <span className="text-slate-500 font-medium block mb-1.5">Términos Clave Detectados:</span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {analysisResult.detectedKeywords.map(kw => (
+                              <span key={kw} className="bg-[#EDE8DF] text-deep-slate-blue px-2 py-0.5 rounded text-[11px] font-semibold">
+                                {kw}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <button type="button" onClick={resetForm} className="btn-pill-accent mt-4">
                     <span>Enviar otra consulta</span>
                     <div className="btn-pill-icon">
                       <ArrowRight className="h-3.5 w-3.5 text-[#EDE8DF]" />
